@@ -1,8 +1,7 @@
-﻿using NUnit.Framework;
-using SeleniumAdvanced.Interactions.Pages.Sortable;
-
-namespace SeleniumAdvanced.Interactions.Tests
+﻿namespace SeleniumAdvanced.Interactions.Tests
 {
+    using NUnit.Framework;
+    using SeleniumAdvanced.Interactions.Pages.Sortable;
 
     [TestFixture]
     public class Sortable : BaseTest

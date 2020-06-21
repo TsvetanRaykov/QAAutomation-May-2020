@@ -1,32 +1,25 @@
-﻿using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-
-namespace SeleniumAdvanced.Interactions.Pages.Droppable
+﻿namespace SeleniumAdvanced.Interactions.Pages.Droppable
 {
+    using OpenQA.Selenium;
+    using TestUtils.Decorators;
+
     public partial class DroppablePage
     {
-        public DroppablePage(IWebDriver driver) : base(driver) { }
+        public DroppablePage(WebDriver driver) : base(driver) { }
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "draggable")]
-        private IWebElement _draggableBox;
+        private WebElement DraggableBox => this.Driver.FindElement(By.Id("draggable")) as WebElement;
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "droppable")]
-        private IWebElement _droppableBox;
+        private Element DroppableBox => this.Driver.FindElement(By.Id("droppable"));
 
-        [CacheLookup, FindsBy(How = How.XPath, Using = "//div[@id='acceptDropContainer']/div/following::div")]
-        private IWebElement _acceptDroppableBox;
+        private Element AcceptDroppableBox => this.Driver.FindElement(By.XPath("//div[@id='acceptDropContainer']/div/following::div"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "droppableExample-tab-accept")]
-        private IWebElement _droppableAcceptSectionLink;
+        private Element DroppableAcceptSectionLink => this.Driver.FindElement(By.Id("droppableExample-tab-accept"));
 
-        [CacheLookup, FindsBy(How = How.XPath, Using = "//div[@id='acceptDropContainer']//*[@id='droppable']")]
-        private IWebElement _acceptContainer;
+        private Element AcceptContainer => this.Driver.FindElement(By.XPath("//div[@id='acceptDropContainer']//*[@id='droppable']"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "acceptable")]
-        private IWebElement _acceptableBox;
+        private Element AcceptableBox => this.Driver.FindElement(By.Id("acceptable"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "notAcceptable")]
-        private IWebElement _notAcceptableBox;
+        private Element NotAcceptableBox => this.Driver.FindElement(By.Id("notAcceptable"));
 
         protected override string Url => "http://demoqa.com/droppable";
     }

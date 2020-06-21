@@ -1,20 +1,19 @@
-﻿using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-
-namespace SeleniumBasics.Google.Pages
+﻿namespace SeleniumBasics.Google.Pages
 {
+    using OpenQA.Selenium;
+    using TestUtils.Decorators;
+
     public class SearchPage : BasePage
     {
-        public SearchPage(IWebDriver driver) : base(driver) { }
+        public SearchPage(WebDriver driver) : base(driver) { }
 
-        [FindsBy(How = How.XPath, Using = "//*[@id='rso']//a")]
-        private readonly IWebElement _firstResult;
+        private Element FirstResult => this.Driver.FindElement(By.XPath("//*[@id='rso']//a"));
 
         public TestPage GoToFirstResult()
         {
             this.Driver
-                .Navigate()
-                .GoToUrl(this._firstResult.GetAttribute("href"));
+                .Navigate(this.FirstResult.GetAttribute("href"));
+
             return new TestPage(this.Driver);
         }
     }

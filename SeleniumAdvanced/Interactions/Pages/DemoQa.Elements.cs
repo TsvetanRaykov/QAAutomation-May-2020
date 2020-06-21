@@ -1,19 +1,20 @@
-﻿using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-
-namespace SeleniumAdvanced.Interactions.Pages
+﻿namespace SeleniumAdvanced.Interactions.Pages
 {
+    using OpenQA.Selenium;
+    using TestUtils.Decorators;
+
     public partial class DemoQa : BasePage
     {
-        public DemoQa(IWebDriver driver) : base(driver) { }
+        public DemoQa(WebDriver driver) : base(driver) { }
 
-        [CacheLookup, FindsBy(How = How.XPath, Using = "//*/h5[normalize-space(text())='Interactions']")]
-        private IWebElement _interactionsLink;
+        private WebElement InteractionsLink => 
+            this.Driver.FindElement(By.XPath("//*/h5[normalize-space(text())='Interactions']")) as WebElement;
 
-        private IWebElement _targetSectionLink(string sectionName) => this.Driver.FindElement(By.XPath($"//ul//li//span[normalize-space(text())='{sectionName}']"));
+        private WebElement TargetSectionLink(string sectionName) => 
+            this.Driver.FindElement(By.XPath($"//ul//li//span[normalize-space(text())='{sectionName}']")) as WebElement;
 
-        [CacheLookup, FindsBy(How = How.XPath, Using = "//div[@class='main-header']")]
-        private IWebElement _sectionHeader;
+        private Element SectionHeader => 
+            this.Driver.FindElement(By.XPath("//div[@class='main-header']"));
 
         protected override string Url => "http://demoqa.com";
     }

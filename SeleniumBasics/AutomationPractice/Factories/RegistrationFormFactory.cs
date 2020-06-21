@@ -1,7 +1,7 @@
-﻿using SeleniumBasics.AutomationPractice.Models;
-
-namespace SeleniumBasics.AutomationPractice.Factories
+﻿namespace SeleniumBasics.AutomationPractice.Factories
 {
+    using SeleniumBasics.AutomationPractice.Models;
+
     public static class RegistrationFormFactory
     {
         public static Subscriber Create()

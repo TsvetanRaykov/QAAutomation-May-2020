@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
-using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-
-namespace SeleniumAdvanced.Interactions.Pages.Sortable
+﻿namespace SeleniumAdvanced.Interactions.Pages.Sortable
 {
+    using System.Collections.Generic;
+    using OpenQA.Selenium;
+    using TestUtils.Decorators;
+
     public partial class SortablePage
     {
-        [CacheLookup, FindsBy(How = How.XPath, Using = "//div[@id='demo-tabpane-list']//div[contains(@class,'list-group-item-action')]")]
-        private IList<IWebElement> _sortableListItems;
+        private List<Element> SortableListItems =>
+            this.Driver.FindElements(
+                By.XPath("//div[@id='demo-tabpane-list']//div[contains(@class,'list-group-item-action')]"));
 
-        [CacheLookup, FindsBy(How = How.XPath, Using = "//div[@id='demo-tabpane-grid']//div[contains(@class,'list-group-item-action')]")]
-        private IList<IWebElement> _sortableGridItems;
+        private List<Element> SortableGridItems => this.Driver.FindElements(
+            By.XPath("//div[@id='demo-tabpane-grid']//div[contains(@class,'list-group-item-action')]"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "demo-tab-grid")]
-        private IWebElement _gridTabLink;
+
+        private Element GridTabLink => this.Driver.FindElement(By.Id("demo-tab-grid"));
     }
 }

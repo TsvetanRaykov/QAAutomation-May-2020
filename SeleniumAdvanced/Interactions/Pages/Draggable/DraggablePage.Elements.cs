@@ -1,28 +1,23 @@
-﻿using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-
-namespace SeleniumAdvanced.Interactions.Pages.Draggable
+﻿namespace SeleniumAdvanced.Interactions.Pages.Draggable
 {
+    using OpenQA.Selenium;
+    using TestUtils.Decorators;
+
     public partial class DraggablePage
     {
-        public DraggablePage(IWebDriver driver) : base(driver) { }
+        public DraggablePage(WebDriver driver) : base(driver) { }
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "draggableExample-tab-axisRestriction")]
-        private IWebElement _axisRestrictionLink;
+        private Element AxisRestrictionLink => this.Driver.FindElement(By.Id("draggableExample-tab-axisRestriction"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "draggableExample-tab-containerRestriction")]
-        private IWebElement _containerRestrictionLink;
+        private Element ContainerRestrictionLink => this.Driver.FindElement(By.Id("draggableExample-tab-containerRestriction"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "restrictedX")]
-        private IWebElement _restrictedXBox;
+        private Element RestrictedXBox => this.Driver.FindElement(By.Id("restrictedX")) as WebElement;
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "restrictedY")]
-        private IWebElement _restrictedYBox;
+        private Element RestrictedYBox => this.Driver.FindElement(By.Id("restrictedY")) as WebElement;
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "containmentWrapper")]
-        private IWebElement _containmentWrapperBox;
+        private Element ContainmentWrapperBox => this.Driver.FindElement(By.Id("containmentWrapper")) as WebElement;
 
-        private IWebElement _containerWithinTheBox => this._containmentWrapperBox.FindElement(By.TagName("div"));
+        private WebElement ContainerWithinTheBox => this.ContainmentWrapperBox.FindElement(By.TagName("div")) as WebElement ;
         
         protected override string Url => "http://demoqa.com/dragabble";
     }

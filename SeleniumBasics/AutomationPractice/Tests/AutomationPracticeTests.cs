@@ -1,9 +1,9 @@
-﻿using NUnit.Framework;
-using SeleniumBasics.AutomationPractice.Factories;
-using SeleniumBasics.AutomationPractice.Pages;
-
-namespace SeleniumBasics.AutomationPractice.Tests
+﻿namespace SeleniumBasics.AutomationPractice.Tests
 {
+    using NUnit.Framework;
+    using SeleniumBasics.AutomationPractice.Factories;
+    using SeleniumBasics.AutomationPractice.Pages;
+
     [TestFixture]
     public class AutomationPracticeTests : BaseTest
     {

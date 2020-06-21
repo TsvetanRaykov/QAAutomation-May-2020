@@ -1,51 +1,45 @@
-﻿using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-
-namespace SeleniumBasics.SoftUni.Pages
+﻿namespace SeleniumBasics.SoftUni.Pages
 {
+    using OpenQA.Selenium;
+    using TestUtils.Decorators;
+
     public class SoftUniPage : BasePage
     {
         private const string Url = "https://softuni.bg";
 
-        public SoftUniPage(IWebDriver driver) : base(driver) { }
+        public SoftUniPage(WebDriver driver) : base(driver) { }
 
-        [FindsBy(How = How.XPath, Using = "//span[@class='cell']//following::span")]
-        private IWebElement _trainingsMenuItem;
+        private Element TrainingsMenuItem => this.Driver.FindElement(By.XPath("//span[@class='cell']//following::span"));
 
-        [CacheLookup, FindsBy(How = How.XPath, Using = "//div[@class='box-content']/h4[normalize-space(text())='QA Automation']")]
-        private IWebElement _courseMenuItem;
+        private Element CourseMenuItem => this.Driver.FindElement(By.XPath("//div[@class='box-content']/h4[normalize-space(text())='QA Automation']"));
 
-        [CacheLookup, FindsBy(How = How.XPath, Using = "//div[contains(@class,'open-courses-wrapper')]//div[contains(@class,'category-title')][normalize-space(text())='Active modules']")]
-        private IWebElement _activeModuleSection;
+        private Element ActiveModuleSection => this.Driver.FindElement(By.XPath("//div[contains(@class,'open-courses-wrapper')]//div[contains(@class,'category-title')][normalize-space(text())='Active modules']"));
 
-        [CacheLookup, FindsBy(How = How.XPath, Using = "//div[contains(@class,'open-courses-wrapper')]//a[starts-with(text(),'Quality Assurance')]")]
-        private IWebElement _moduleMenuItem;
+        private Element ModuleMenuItem => this.Driver.FindElement(By.XPath("//div[contains(@class,'open-courses-wrapper')]//a[starts-with(text(),'Quality Assurance')]"));
 
-        [CacheLookup, FindsBy(How = How.XPath, Using = "//ul[@class='lang']//a[normalize-space(text())='English']")]
-        private IWebElement _langSwitch;
+        private Element LangSwitch => this.Driver.FindElement(By.XPath("//ul[@class='lang']//a[normalize-space(text())='English']"));
 
         public SoftUniPage GoToSoftUni()
         {
-            this.Driver.Navigate().GoToUrl(Url);
-            this.Driver.Manage().Window.Maximize();
+            this.Driver.Navigate(Url);
             return this.SwitchedToEnglish();
         }
 
         private SoftUniPage SwitchedToEnglish()
         {
-            if (this._trainingsMenuItem.Text.ToLowerInvariant() != "trainings")
+            if (this.TrainingsMenuItem.Text.ToLowerInvariant() != "trainings")
             {
-                this._langSwitch.Click();
+                this.LangSwitch.Click();
             }
             return this;
         }
 
         public QaCoursePage OpenCoursePage()
         {
-            this._trainingsMenuItem.Click();
-            this._activeModuleSection.Click();
-            this._moduleMenuItem.Click();
-            this._courseMenuItem.Click();
+            this.TrainingsMenuItem.Click();
+            this.ActiveModuleSection.Click();
+            this.ModuleMenuItem.Click();
+            this.CourseMenuItem.Click();
 
             return new QaCoursePage(this.Driver);
         }

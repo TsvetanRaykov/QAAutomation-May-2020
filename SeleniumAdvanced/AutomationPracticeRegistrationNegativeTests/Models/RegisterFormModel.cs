@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Models
+﻿namespace SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class RegisterFormModel
     {
         [MinLength(3), MaxLength(8)]

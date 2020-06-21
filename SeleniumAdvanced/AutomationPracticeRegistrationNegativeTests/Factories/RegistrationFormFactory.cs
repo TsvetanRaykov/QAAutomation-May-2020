@@ -1,8 +1,7 @@
-﻿using AutoFixture;
-
-namespace SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Factories
+﻿namespace SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Factories
 {
-    using Models;
+    using AutoFixture;
+    using SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Models;
     using TestUtils.Extensions;
 
     public static class RegistrationFormFactory

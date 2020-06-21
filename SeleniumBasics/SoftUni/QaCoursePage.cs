@@ -1,37 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-
-namespace SeleniumBasics.SoftUni
+﻿namespace SeleniumBasics.SoftUni
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using OpenQA.Selenium;
+    using TestUtils.Decorators;
+
     public class QaCoursePage : BasePage
     {
-        public QaCoursePage(IWebDriver driver) : base(driver) { }
+        public QaCoursePage(WebDriver driver) : base(driver) { }
 
-        [CacheLookup, FindsBy(How = How.TagName, Using = "h1")]
-        private IList<IWebElement> _headings;
-
-        /// <summary>
-        /// Retrieve the headings as Base64 strings in order to avoid failures caused by encoding.
-        /// E.g. QA Automation - ìàé 2020 
-        /// </summary>
-        public string[] GetHeadingsAsBase64()
-        {
-            return this._headings?
-                .Select(a =>
-                {
-                    var strBytes = Encoding.UTF8.GetBytes(a.Text);
-                    return Convert.ToBase64String(strBytes);
-                })
-                .ToArray() ?? new string[0];
-        }
-
+        private IEnumerable<Element> Headings => this.Driver.FindElements(By.TagName("h1"));
+        
         public string[] GetHeadings()
         {
-            return this._headings?
+            return this.Headings?
                 .Select(a => a.Text)
                 .ToArray() ?? new string[0];
         }

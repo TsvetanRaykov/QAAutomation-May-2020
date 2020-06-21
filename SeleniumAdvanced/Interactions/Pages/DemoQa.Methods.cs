@@ -1,17 +1,15 @@
-﻿using TestUtils.Extensions;
-
-namespace SeleniumAdvanced.Interactions.Pages
+﻿namespace SeleniumAdvanced.Interactions.Pages
 {
     public partial class DemoQa
     {
         private DemoQa NavigateToSection(string sectionName)
         {
-            this.Driver
-                .ScrollTo(this._interactionsLink)
+            this.InteractionsLink
+                .ScrollTo()
                 .Click();
 
-            this.Driver
-                .ScrollTo(this._targetSectionLink(sectionName))
+            this.TargetSectionLink(sectionName)
+                .ScrollTo()
                 .Click();
 
             return this;

@@ -4,7 +4,7 @@
     {
         public SelectablePage GoToGridTab()
         {
-            this._gridTab.Click();
+            this.GridTab.Click();
             return this;
         }
     }

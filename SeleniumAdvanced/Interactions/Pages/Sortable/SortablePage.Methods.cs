@@ -4,7 +4,7 @@
     {
         public SortablePage GoToGridTab()
         {
-            this._gridTabLink.Click();
+            this.GridTabLink.Click();
             return this;
         }
     }

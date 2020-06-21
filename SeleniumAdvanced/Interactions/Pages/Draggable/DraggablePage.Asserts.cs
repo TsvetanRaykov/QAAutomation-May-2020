@@ -1,49 +1,48 @@
-﻿using System.Drawing;
-using NUnit.Framework;
-using TestUtils.Extensions;
-
-namespace SeleniumAdvanced.Interactions.Pages.Draggable
+﻿namespace SeleniumAdvanced.Interactions.Pages.Draggable
 {
+    using System.Drawing;
+    using NUnit.Framework;
+
     public partial class DraggablePage : DemoQa
     {
    
         public void AssertThatXBoundedBoxNotMoveOnY()
         {
-            var yLocationBefore = this._restrictedXBox.Location.Y;
+            var yLocationBefore = this.RestrictedXBox.Location.Y;
 
             this.Builder
-                .ClickAndHold(this._restrictedXBox)
+                .ClickAndHold(this.RestrictedXBox.NativeElement)
                 .MoveByOffset(100, 200)
                 .Release()
                 .Perform();
 
-            Assert.AreEqual(yLocationBefore, this._restrictedXBox.Location.Y);
+            Assert.AreEqual(yLocationBefore, this.RestrictedXBox.Location.Y);
         }
 
         public void AssertThatYBoundedBoxNotMoveOnX()
         {
-            var xLocationBefore = this._restrictedYBox.Location.X;
+            var xLocationBefore = this.RestrictedYBox.Location.X;
 
             this.Builder
-                .ClickAndHold(this._restrictedYBox)
+                .ClickAndHold(this.RestrictedYBox.NativeElement)
                 .MoveByOffset(200, 200)
                 .Release()
                 .Perform();
 
-            Assert.AreEqual(xLocationBefore, this._restrictedYBox.Location.X);
+            Assert.AreEqual(xLocationBefore, this.RestrictedYBox.Location.X);
         }
 
         public void AssertThatContainerRestrictedBoxNotMoveOutsideOfTheBoundaries()
         {
-            var restrictionField = new Rectangle(this._containmentWrapperBox.Location, this._containmentWrapperBox.Size);
+            var restrictionField = new Rectangle(this.ContainmentWrapperBox.Location, this.ContainmentWrapperBox.Size);
 
             this.Builder
-                .ClickAndHold(this.Driver.ScrollTo(this._containerWithinTheBox))
+                .ClickAndHold(this.ContainerWithinTheBox.ScrollTo().NativeElement)
                 .MoveByOffset(500, 500)
                 .Release()
                 .Perform();
 
-            Assert.IsTrue(restrictionField.Contains(this._containerWithinTheBox.Location));
+            Assert.IsTrue(restrictionField.Contains(this.ContainerWithinTheBox.Location));
         }
 
     }

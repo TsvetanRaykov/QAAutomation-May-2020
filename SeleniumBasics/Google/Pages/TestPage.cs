@@ -1,15 +1,14 @@
-﻿using OpenQA.Selenium;
-using TestUtils.Extensions;
-
-namespace SeleniumBasics.Google.Pages
+﻿namespace SeleniumBasics.Google.Pages
 {
+    using TestUtils.Decorators;
+
     public class TestPage : BasePage
     {
-        public TestPage(IWebDriver driver) : base(driver) { }
+        public TestPage(WebDriver driver) : base(driver) { }
 
         public string GetPageTitle()
         {
-            return this.Driver.PageReady().Title;
+            return this.Driver.WrappedDriver.Title;
         }
     }
 }

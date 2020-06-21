@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
-using SeleniumBasics.Google.Pages;
-
-namespace SeleniumBasics.Google.Tests
+﻿namespace SeleniumBasics.Google.Tests
 {
+    using NUnit.Framework;
+    using SeleniumBasics.Google.Pages;
+
     [TestFixture]
     public class GoogleSearchTests : BaseTest
     {
