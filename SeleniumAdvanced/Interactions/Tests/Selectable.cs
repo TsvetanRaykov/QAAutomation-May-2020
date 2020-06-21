@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
-using SeleniumAdvanced.Interactions.Pages.Selectable;
-
-namespace SeleniumAdvanced.Interactions.Tests
+﻿namespace SeleniumAdvanced.Interactions.Tests
 {
+    using NUnit.Framework;
+    using SeleniumAdvanced.Interactions.Pages.Selectable;
+
     [TestFixture]
     public class Selectable : BaseTest
     {

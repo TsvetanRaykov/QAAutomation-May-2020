@@ -4,7 +4,7 @@
     {
         public DroppablePage GoToAcceptSection()
         {
-            this._droppableAcceptSectionLink.Click();
+            this.DroppableAcceptSectionLink.Click();
             return this;
         }
     }

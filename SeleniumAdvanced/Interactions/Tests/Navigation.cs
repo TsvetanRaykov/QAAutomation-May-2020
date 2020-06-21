@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
-using SeleniumAdvanced.Interactions.Pages;
-
-namespace SeleniumAdvanced.Interactions.Tests
+﻿namespace SeleniumAdvanced.Interactions.Tests
 {
+    using NUnit.Framework;
+    using SeleniumAdvanced.Interactions.Pages;
+
     [TestFixture]
     public class Navigation : BaseTest
     {

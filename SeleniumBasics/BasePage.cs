@@ -1,16 +1,14 @@
-﻿using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-
-namespace SeleniumBasics
+﻿namespace SeleniumBasics
 {
+    using TestUtils.Decorators;
+
     public class BasePage
     {
-        protected readonly IWebDriver Driver;
+        protected readonly WebDriver Driver;
 
-        protected BasePage(IWebDriver driver)
+        protected BasePage(WebDriver driver)
         {
             this.Driver = driver;
-            PageFactory.InitElements(this.Driver, this);
         }
     }
 }

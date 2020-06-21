@@ -1,14 +1,14 @@
-﻿using NUnit.Framework;
-
-namespace SeleniumAdvanced.Interactions.Pages
+﻿namespace SeleniumAdvanced.Interactions.Pages
 {
+    using NUnit.Framework;
+
     public partial class DemoQa
     {
         public void AssertThatSectionExist(string sectionName)
         {
             this.NavigateToSection(sectionName);
 
-            Assert.AreEqual(sectionName, this._sectionHeader.Text.Trim());
+            Assert.AreEqual(sectionName, this.SectionHeader.Text.Trim());
         }
     }
 }

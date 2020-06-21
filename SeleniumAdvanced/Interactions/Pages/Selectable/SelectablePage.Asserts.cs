@@ -1,27 +1,27 @@
-﻿using System.Linq;
-using NUnit.Framework;
-
-namespace SeleniumAdvanced.Interactions.Pages.Selectable
+﻿namespace SeleniumAdvanced.Interactions.Pages.Selectable
 {
+    using System.Linq;
+    using NUnit.Framework;
+
     public partial class SelectablePage : DemoQa
     {
      
         public void AssertThatSelectedItemHaveCorrectClass()
         {
-            foreach (var listItem in this._listItems)
+            foreach (var listItem in this.ListItems)
             {
-                listItem.Click();
+                listItem.NativeElement.Click();
             }
 
-            Assert.IsTrue(this._listItems.All(e => e.GetAttribute("class").Contains("active")));
+            Assert.IsTrue(this.ListItems.All(e => e.GetAttribute("class").Contains("active")));
         }
 
         public void AssertThatSelectedItemMustDifferentColor()
         {
-            foreach (var testBox in this._testBoxes)
+            foreach (var testBox in this.TestBoxes)
             {
                 var colorBefore = testBox.GetCssValue("background-color");
-                testBox.Click();
+                testBox.NativeElement.Click();
                 var colorAfter = testBox.GetCssValue("background-color");
 
                 Assert.That(colorAfter, Is.Not.EqualTo(colorBefore));

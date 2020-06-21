@@ -1,24 +1,22 @@
-﻿using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-
-namespace SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Pages
+﻿namespace SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Pages
 {
+    using OpenQA.Selenium;
+    using TestUtils.Decorators;
+
     public class AutomationPracticeHome : BasePage
     {
         private const string Url = "http://automationpractice.com/index.php";
 
-        public AutomationPracticeHome(IWebDriver driver) : base(driver) { }
+        public AutomationPracticeHome(WebDriver driver) : base(driver) { }
 
         public AutomationPracticeRegisterEmail GoToEmailForm()
         {
-            this.Driver.Navigate().GoToUrl(Url);
-            this._signInItem.Click();
+            this.Driver.Navigate(Url);
+            this.SignInItem.Click();
             return new AutomationPracticeRegisterEmail(this.Driver);
         }
 
-        [CacheLookup, FindsBy(How = How.XPath, Using = "//a[@class='login']")]
-        private readonly IWebElement _signInItem;
-
+        private Element SignInItem => this.Driver.FindElement(By.XPath("//a[@class='login']"));
 
     }
 }

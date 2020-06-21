@@ -1,29 +1,25 @@
-﻿using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using TestUtils.Extensions;
-
-namespace SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Pages
+﻿namespace SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Pages
 {
+    using OpenQA.Selenium;
+    using TestUtils.Decorators;
+
     public class AutomationPracticeRegisterEmail : BasePage
     {
-        public AutomationPracticeRegisterEmail(IWebDriver driver) : base(driver) { }
+        public AutomationPracticeRegisterEmail(WebDriver driver) : base(driver) { }
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "email_create")]
-        private IWebElement _registerEmailField;
+        private Element RegisterEmailField => this.Driver.FindElement(By.Id("email_create"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "SubmitCreate")]
-        private IWebElement _submitButton;
+        private Element SubmitButton => this.Driver.FindElement(By.Id("SubmitCreate"));
 
         public AutomationPracticeRegisterEmail FillEmailFormWithValidEmail(string email)
         {
-            this.Driver.PageReady();
-            this._registerEmailField.SendKeys(email);
+            this.RegisterEmailField.TypeText(email);
             return this;
         }
 
         public AutomationPracticeRegistration GoToRegistrationPage()
         {
-            this._submitButton.Click();
+            this.SubmitButton.Click();
             return new AutomationPracticeRegistration(this.Driver);
         }
     }

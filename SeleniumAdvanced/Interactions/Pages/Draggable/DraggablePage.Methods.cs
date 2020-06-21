@@ -4,12 +4,12 @@
     {
         public DraggablePage GoToAxisRestrictionSection()
         {
-            this._axisRestrictionLink.Click();
+            this.AxisRestrictionLink.Click();
             return this;
         }
         public DraggablePage GoToContainerRestrictionSection()
         {
-            this._containerRestrictionLink.Click();
+            this.ContainerRestrictionLink.Click();
             return this;
         }
     }

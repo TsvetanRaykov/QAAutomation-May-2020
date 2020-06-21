@@ -1,60 +1,47 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.PageObjects;
-using TestUtils.Extensions;
-
-namespace SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Pages
+﻿namespace SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Pages
 {
+    using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.UI;
+    using TestUtils.Decorators;
     using Models;
+
     public class AutomationPracticeRegistration : BasePage
     {
-        public AutomationPracticeRegistration(IWebDriver driver) : base(driver)
+        public AutomationPracticeRegistration(WebDriver driver) : base(driver)
         {
         }
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "customer_firstname")]
-        private IWebElement _firstName;
+        private Element FirstName => this.Driver.FindElement(By.Id("customer_firstname"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "customer_lastname")]
-        private IWebElement _lastName;
+        private Element LastName => this.Driver.FindElement(By.Id("customer_lastname"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "passwd")]
-        private IWebElement _password;
+        private Element Password => this.Driver.FindElement(By.Id("passwd"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "city")]
-        private IWebElement _city;
+        private Element City => this.Driver.FindElement(By.Id("city"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "postcode")]
-        private IWebElement _postCode;
+        private Element PostCode => this.Driver.FindElement(By.Id("postcode"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "phone_mobile")]
-        private IWebElement _phone;
+        private Element Phone => this.Driver.FindElement(By.Id("phone_mobile"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "address1")]
-        private IWebElement _address;
+        private Element Address => this.Driver.FindElement(By.Id("address1"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "submitAccount")]
-        private IWebElement _submitButton;
+        private Element SubmitButton => this.Driver.FindElement(By.Id("submitAccount"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "id_state")]
-        private IWebElement _stateDropDown;
+        private WebElement StateDropDown => this.Driver.FindElement(By.Id("id_state")) as WebElement;
 
-        [CacheLookup, FindsBy(How = How.XPath, Using = "//div[contains(@class,'alert-danger')]//li")]
-        private IWebElement _errorContainer;
+        private Element ErrorContainer => this.Driver.FindElement(By.XPath("//div[contains(@class,'alert-danger')]//li"));
 
         public AutomationPracticeRegistration FillWith(RegisterFormModel model)
         {
-            PageFactory.InitElements(this.Driver, this);
+            this.FirstName.TypeText(model.FirstName);
+            this.LastName.TypeText(model.LastName);
+            this.Password.TypeText(model.Password);
+            this.City.TypeText(model.City);
+            this.PostCode.TypeText(model.PostCode);
+            this.Phone.TypeText(model.Phone);
+            this.Address.TypeText(model.Address);
 
-            this._firstName.SetFormInputValue(model.FirstName);
-            this._lastName.SetFormInputValue(model.LastName);
-            this._password.SetFormInputValue(model.Password);
-            this._city.SetFormInputValue(model.City);
-            this._postCode.SetFormInputValue(model.PostCode);
-            this._phone.SetFormInputValue(model.Phone);
-            this._address.SetFormInputValue(model.Address);
-
-            var stateDropdown = new SelectElement(this._stateDropDown);
+            var stateDropdown = new SelectElement(this.StateDropDown.NativeElement);
             stateDropdown.SelectByIndex(1);
 
             return this;
@@ -62,13 +49,13 @@ namespace SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Pages
 
         public AutomationPracticeRegistration Submit()
         {
-            this._submitButton.Click();
+            this.SubmitButton.Click();
             return this;
         }
 
         public string GetErrorMessage()
         {
-            return this._errorContainer.Text;
+            return this.ErrorContainer.Text;
         }
     }
 }

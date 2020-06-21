@@ -1,28 +1,25 @@
-﻿using System;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using SeleniumExtras.PageObjects;
-
-namespace SeleniumAdvanced.Interactions
+﻿namespace SeleniumAdvanced.Interactions
 {
+    using OpenQA.Selenium.Interactions;
+    using TestUtils.Decorators;
+
     public abstract class BasePage
     {
         protected abstract string Url { get; }
 
-        protected BasePage(IWebDriver driver)
+        protected BasePage(WebDriver driver)
         {
             this.Driver = driver;
-            this.Builder = new Actions(this.Driver);
+            this.Builder = new Actions(this.Driver.WrappedDriver);
             this.Navigate();
         }
 
-        protected IWebDriver Driver { get; }
+        protected WebDriver Driver { get; }
         protected Actions Builder { get; }
 
         private void Navigate()
         {
-            this.Driver.Navigate().GoToUrl(this.Url);
-            PageFactory.InitElements(this.Driver, this);
+            this.Driver.Navigate(this.Url);
         }
 
     }

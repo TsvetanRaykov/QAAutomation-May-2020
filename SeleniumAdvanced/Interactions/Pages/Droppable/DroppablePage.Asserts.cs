@@ -1,44 +1,43 @@
-﻿using NUnit.Framework;
-using TestUtils.Extensions;
-
-namespace SeleniumAdvanced.Interactions.Pages.Droppable
+﻿namespace SeleniumAdvanced.Interactions.Pages.Droppable
 {
+    using NUnit.Framework;
+
     public partial class DroppablePage : DemoQa
     {
-   
+
         public void AssertThatDraggableBoxCanBeDroppedInsideDroppableBox()
         {
             this.Builder
-                .DragAndDrop(this.Driver.ScrollTo(this._draggableBox), this._droppableBox)
+                .DragAndDrop(this.DraggableBox.ScrollTo().NativeElement, this.DroppableBox.NativeElement)
                 .Perform();
 
-            Assert.AreEqual("Dropped!", this._droppableBox.Text);
+            Assert.AreEqual("Dropped!", this.DroppableBox.Text);
         }
 
         public void AssertThatAcceptableBoxChangeTargetBoxColorWhenDroppedIn()
         {
-            var colorBefore = this._acceptContainer.GetCssValue("background-color");
+            var colorBefore = this.AcceptContainer.GetCssValue("background-color");
 
             this.Builder
-                .DragAndDrop(this._acceptableBox, this._acceptDroppableBox)
+                .DragAndDrop(this.AcceptableBox.NativeElement, this.AcceptDroppableBox.NativeElement)
                 .Perform();
 
-            var colorAfter = this._acceptContainer.GetCssValue("background-color");
+            var colorAfter = this.AcceptContainer.GetCssValue("background-color");
 
             Assert.AreNotEqual(colorBefore, colorAfter);
         }
 
         public void AssertThatNotAcceptableBoxNotChangeTargetColorWhenDroppedIn()
         {
-            var colorBefore = this._acceptContainer.GetCssValue("background-color");
+            var colorBefore = this.AcceptContainer.GetCssValue("background-color");
 
             this.Builder
-                .MoveToElement(this._notAcceptableBox)
-                .DragAndDropToOffset(this._notAcceptableBox, 300, 0)
+                .MoveToElement(this.NotAcceptableBox.NativeElement)
+                .DragAndDropToOffset(this.NotAcceptableBox.NativeElement, 300, 0)
                 .MoveByOffset(300, 0)
                 .Perform();
 
-            var colorAfter = this._acceptContainer.GetCssValue("background-color");
+            var colorAfter = this.AcceptContainer.GetCssValue("background-color");
 
             Assert.AreEqual(colorBefore, colorAfter);
         }

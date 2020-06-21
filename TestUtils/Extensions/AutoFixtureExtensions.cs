@@ -1,8 +1,8 @@
-﻿using System;
-using AutoFixture;
-
-namespace TestUtils.Extensions
+﻿namespace TestUtils.Extensions
 {
+    using System;
+    using AutoFixture;
+
     public static class AutoFixtureExtensions
     {
         public static int CreateInt(this IFixture fixture, int min, int max)

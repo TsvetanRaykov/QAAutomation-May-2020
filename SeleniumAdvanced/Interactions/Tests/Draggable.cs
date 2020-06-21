@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
-using SeleniumAdvanced.Interactions.Pages.Draggable;
-
-namespace SeleniumAdvanced.Interactions.Tests
+﻿namespace SeleniumAdvanced.Interactions.Tests
 {
+    using NUnit.Framework;
+    using SeleniumAdvanced.Interactions.Pages.Draggable;
+
     [TestFixture]
     public class Draggable : BaseTest
     {

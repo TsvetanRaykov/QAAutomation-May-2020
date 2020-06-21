@@ -1,8 +1,7 @@
-﻿using NUnit.Framework;
-using SeleniumAdvanced.Interactions.Pages.Droppable;
-
-namespace SeleniumAdvanced.Interactions.Tests
+﻿namespace SeleniumAdvanced.Interactions.Tests
 {
+    using NUnit.Framework;
+    using SeleniumAdvanced.Interactions.Pages.Droppable;
 
     [TestFixture]
     public class Droppable : BaseTest

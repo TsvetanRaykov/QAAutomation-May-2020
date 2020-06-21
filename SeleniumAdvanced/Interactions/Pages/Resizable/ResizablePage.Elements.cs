@@ -1,25 +1,21 @@
-﻿using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-
-namespace SeleniumAdvanced.Interactions.Pages.Resizable
+﻿namespace SeleniumAdvanced.Interactions.Pages.Resizable
 {
+    using OpenQA.Selenium;
+    using TestUtils.Decorators;
+
     public partial class ResizablePage
     {
-        public ResizablePage(IWebDriver driver) : base(driver) { }
+        public ResizablePage(WebDriver driver) : base(driver) { }
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "resizableBoxWithRestriction")]
-        private IWebElement _resizableRestrictedBox;
+        private Element ResizableRestrictedBox => this.Driver.FindElement(By.Id("resizableBoxWithRestriction"));
 
-        [CacheLookup]
-        private IWebElement _resizableRestrictedBoxHandler =>
-            this._resizableRestrictedBox.FindElement(By.XPath("span"));
+        private WebElement ResizableRestrictedBoxHandler =>
+            this.ResizableRestrictedBox.FindElement(By.XPath("span")) as WebElement;
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "resizable")]
-        private IWebElement _resizableBox;
+        private Element ResizableBox => this.Driver.FindElement(By.Id("resizable"));
 
-        [CacheLookup]
-        private IWebElement _resizableBoxHandler =>
-            this._resizableBox.FindElement(By.XPath("span"));
+        private WebElement ResizableBoxHandler =>
+            this.ResizableBox.FindElement(By.XPath("span")) as WebElement;
 
         protected override string Url => "http://demoqa.com/resizable";
 

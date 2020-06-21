@@ -1,20 +1,19 @@
-﻿using System;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.PageObjects;
-
-namespace SeleniumBasics.AutomationPractice.Pages
+﻿namespace SeleniumBasics.AutomationPractice.Pages
 {
+    using System;
+    using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.UI;
+    using TestUtils.Decorators;
+
     public class AutomationPracticeRegisterPage : BasePage
     {
-        public AutomationPracticeRegisterPage(IWebDriver driver) : base(driver) { }
+        public AutomationPracticeRegisterPage(WebDriver driver) : base(driver) { }
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "email")]
-        private IWebElement _emailField;
+        private Element _emailField=>this.Driver.FindElement(By.Id("email"));
 
         public string GetEmailFieldValue()
         {
-            new WebDriverWait(this.Driver, TimeSpan.FromSeconds(10))
+            new WebDriverWait(this.Driver.WrappedDriver, TimeSpan.FromSeconds(10))
                 .Until(d => (bool)((IJavaScriptExecutor)d).
                   ExecuteScript("return document.getElementById('email').value !== ''"));
 

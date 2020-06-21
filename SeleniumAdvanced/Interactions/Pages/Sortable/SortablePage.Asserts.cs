@@ -1,31 +1,30 @@
-﻿using System.Drawing;
-using System.Linq;
-using AutoFixture;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using SeleniumExtras.PageObjects;
-using TestUtils.Extensions;
-
-namespace SeleniumAdvanced.Interactions.Pages.Sortable
+﻿namespace SeleniumAdvanced.Interactions.Pages.Sortable
 {
+    using System.Drawing;
+    using System.Linq;
+    using AutoFixture;
+    using NUnit.Framework;
+    using OpenQA.Selenium.Interactions;
+    using TestUtils.Decorators;
+    using TestUtils.Extensions;
+
     public partial class SortablePage : DemoQa
     {
-        public SortablePage(IWebDriver driver) : base(driver) { }
+        public SortablePage(WebDriver driver) : base(driver) { }
 
         public void AssertThatMovedListItemMustHaveCorrectPosition()
         {
-            var itemText = this._sortableListItems[0].Text;
+            var itemText = this.SortableListItems[0].Text;
 
-            foreach (var sortableItem in this._sortableListItems)
+            foreach (var element in this.SortableListItems)
             {
-                new Actions(this.Driver)
-                    .DragAndDropToOffset(sortableItem, 0, 50)
+                var sortableItem = (WebElement)element;
+                new Actions(this.Driver.WrappedDriver)
+                    .DragAndDropToOffset(sortableItem.NativeElement, 0, 50)
                     .Perform();
             }
 
-            PageFactory.InitElements(this.Driver, this);
-            var actual = this._sortableListItems[^1].Text;
+            var actual = this.SortableListItems[^1].Text;
 
             Assert.AreEqual(itemText, actual);
         }
@@ -35,11 +34,11 @@ namespace SeleniumAdvanced.Interactions.Pages.Sortable
         {
             // Shuffle
             var fixture = new Fixture();
-            PageFactory.InitElements(this.Driver, this);
-            foreach (var sortableItem in this._sortableGridItems)
+            foreach (var element in this.SortableGridItems)
             {
-                new Actions(this.Driver)
-                    .DragAndDropToOffset(this.Driver.ScrollTo(sortableItem), fixture.CreateInt(0, 500), fixture.CreateInt(0, 500))
+                var sortableItem = (WebElement)element;
+                new Actions(this.Driver.WrappedDriver)
+                    .DragAndDropToOffset(sortableItem.ScrollTo().NativeElement, fixture.CreateInt(0, 500), fixture.CreateInt(0, 500))
                     .Perform();
             }
 
@@ -53,8 +52,8 @@ namespace SeleniumAdvanced.Interactions.Pages.Sortable
 
                 for (int j = 0, m = 0; j < 3; j++, m += 3)
                 {
-                    row[j] = this._sortableGridItems[l++].Location;
-                    col[j] = this._sortableGridItems[i + m].Location;
+                    row[j] = this.SortableGridItems[l++].Location;
+                    col[j] = this.SortableGridItems[i + m].Location;
                 }
 
                 rows[i] = row;

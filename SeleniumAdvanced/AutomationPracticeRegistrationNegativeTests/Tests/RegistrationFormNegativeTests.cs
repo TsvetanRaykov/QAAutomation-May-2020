@@ -1,10 +1,9 @@
-﻿using AutoFixture;
-using NUnit.Framework;
-
-namespace SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Tests
+﻿namespace SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Tests
 {
-    using Factories;
-    using Pages;
+    using AutoFixture;
+    using NUnit.Framework;
+    using SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Factories;
+    using SeleniumAdvanced.AutomationPracticeRegistrationNegativeTests.Pages;
 
     [TestFixture]
     public class RegistrationFormNegativeTests : BaseTest

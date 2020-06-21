@@ -1,8 +1,8 @@
-using NUnit.Framework;
-using SeleniumBasics.SoftUni.Pages;
-
 namespace SeleniumBasics.SoftUni.Tests
 {
+    using NUnit.Framework;
+    using SeleniumBasics.SoftUni.Pages;
+
     public class Tests : BaseTest
     {
 

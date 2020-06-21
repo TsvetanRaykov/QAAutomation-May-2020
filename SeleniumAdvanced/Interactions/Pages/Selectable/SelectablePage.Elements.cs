@@ -1,23 +1,20 @@
-﻿using System.Collections.Generic;
-using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-
-namespace SeleniumAdvanced.Interactions.Pages.Selectable
+﻿namespace SeleniumAdvanced.Interactions.Pages.Selectable
 {
+    using System.Collections.Generic;
+    using OpenQA.Selenium;
+    using TestUtils.Decorators;
+
     public partial class SelectablePage
     {
-        public SelectablePage(IWebDriver driver) : base(driver) { }
+        public SelectablePage(WebDriver driver) : base(driver) { }
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "verticalListContainer")]
-        private IWebElement _verticalListContainer;
+        private Element VerticalListContainer => this.Driver.FindElement(By.Id("verticalListContainer"));
 
-        private IList<IWebElement> _listItems => this._verticalListContainer.FindElements(By.TagName("li"));
+        private IEnumerable<Element> ListItems => this.VerticalListContainer.FindElements(By.TagName("li"));
 
-        [CacheLookup, FindsBy(How = How.Id, Using = "demo-tab-grid")]
-        private IWebElement _gridTab;
+        private Element GridTab => this.Driver.FindElement(By.Id("demo-tab-grid"));
 
-        [CacheLookup, FindsBy(How = How.XPath, Using = "//div[@id='gridContainer']//li")]
-        private IList<IWebElement> _testBoxes;
+        private List<Element> TestBoxes => this.Driver.FindElements(By.XPath("//div[@id='gridContainer']//li")) ;
 
         protected override string Url => "http://demoqa.com/selectable";
     }
