@@ -20,22 +20,22 @@
 
         public IWebDriver WrappedDriver { get; private set; }
 
-        public override void Start(Browser browser, dynamic options = null)
+        public override void Start(Browser browser, DriverOptions options = null)
         {
             this.WrappedDriver = browser switch
             {
                 Browser.Chrome =>
-                new ChromeDriver(Environment.CurrentDirectory, options ?? new ChromeOptions()),
+                new ChromeDriver(Environment.CurrentDirectory, (ChromeOptions)options ?? new ChromeOptions()),
                 Browser.Firefox =>
-                new FirefoxDriver(Environment.CurrentDirectory, options ?? new FirefoxOptions()),
+                new FirefoxDriver(Environment.CurrentDirectory, (FirefoxOptions)options ?? new FirefoxOptions()),
                 Browser.Edge =>
-                new EdgeDriver(Environment.CurrentDirectory, options ?? new EdgeOptions()),
+                new EdgeDriver(Environment.CurrentDirectory, (EdgeOptions)options ?? new EdgeOptions()),
                 Browser.Opera =>
-                new OperaDriver(Environment.CurrentDirectory, options ?? new OperaOptions()),
+                new OperaDriver(Environment.CurrentDirectory, (OperaOptions)options ?? new OperaOptions()),
                 Browser.Safari =>
-                new SafariDriver(Environment.CurrentDirectory, options ?? new SafariOptions()),
+                new SafariDriver(Environment.CurrentDirectory, (SafariOptions)options ?? new SafariOptions()),
                 Browser.InternetExplorer =>
-                new InternetExplorerDriver(Environment.CurrentDirectory, options ?? new InternetExplorerOptions()),
+                new InternetExplorerDriver(Environment.CurrentDirectory, (InternetExplorerOptions)options ?? new InternetExplorerOptions()),
                 _ => throw new ArgumentOutOfRangeException(nameof(browser), browser, null),
             };
             this._webDriverWait = new WebDriverWait(this.WrappedDriver, TimeSpan.FromSeconds(30));

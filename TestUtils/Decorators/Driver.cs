@@ -5,7 +5,7 @@
 
     public abstract class Driver
     {
-        public abstract void Start(Browser browser, dynamic options = null);
+        public abstract void Start(Browser browser, DriverOptions options = null);
         public abstract void Quit();
         public abstract void GoToUrl(string url);
         public abstract Element FindElement(By locator);
